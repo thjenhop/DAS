@@ -1,0 +1,92 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+void MergeSort(int a[], int left, int right);
+
+void Merge(int arr[], int left, int mid, int right);
+
+int main()
+{
+
+    int arr[10];
+    for(int i = 0; i < 10; i++)
+    {
+        // 5 13 52 -34 95 43 53 0 3 10
+        cin >> arr[i];
+    }
+    int l = 0;
+    int r = 9;
+
+    MergeSort(arr, l, r);
+    for(int i = 0; i < 10; i++)
+    {
+        cout << arr[i] << " ";
+    }
+}
+void Merge(int array[], int left, int mid, int right)
+{
+    int temp1[mid - left + 1];
+	int temp2[right - mid];
+	int k = left;
+
+	for(int i = 0; i < mid - left + 1; i++)
+    {
+        temp1[i] = array[k];
+        k++;
+    }
+	for(int i = 0; i < right - mid; i++)
+    {
+        temp2[i] = array[k];
+        k++;
+    }
+
+
+	int i = 0, j = 0;
+	k = left;
+
+	while((i <= mid - left) && (j < right - mid))
+    {
+
+		if(temp1[i] < temp2[j])
+        {
+
+			array[k] = temp1[i];
+			i++;
+		}
+		else
+        {
+
+			array[k] = temp2[j];
+			j++;
+		}
+		k++;
+	}
+
+	while(i <= mid - left)
+    {
+
+		array[k] = temp1[i];
+		k++;
+		i++;
+	}
+
+	while(j < right - mid)
+    {
+
+		array[k] = temp2[j];
+		k++;
+		j++;
+	}
+}
+void MergeSort(int a[], int left, int right)
+{
+    if(left < right)
+    {
+        int mid = (left + right) / 2;
+        MergeSort(a, left, mid);
+        MergeSort(a, mid + 1, right);
+        Merge(a, left, mid, right);
+    }
+}
