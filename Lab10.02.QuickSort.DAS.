@@ -28,10 +28,10 @@ void quickSort(int arr[], int left, int right)
     {
         int i = left;
         int j = right;
-        int key = arr[(i + j) / 2];
-        while(i < j)
+        int key = arr[right];
+        while(i <= j)
         {
-            while(arr[i] <= key)
+            while(arr[i] < key)
             {
                 i++;
             }
