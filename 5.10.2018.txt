@@ -1,0 +1,67 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    int arr[2 * n];
+
+
+    for(int i = 0; i < 2 * n; i++)
+    {
+        cin >> arr[i];
+
+    }
+    stack <int> x;
+    x.push(arr[0]);
+    x.push(arr[1]);
+
+    for(int i = 2; i < 2 * n; i++)
+    {
+        if(i % 2 == 0)
+        {
+            if(arr[i] > x.top())
+            {
+
+                x.push(arr[i]);
+                x.push(arr[i + 1]);
+                ++i;
+            }
+            else
+            {
+                if(arr[i + 1] > x.top())
+                {
+                    x.pop();
+                    x.push(arr[i + 1]);
+                    ++i;
+                }
+                else
+                {
+                    ++i;
+                }
+
+            }
+        }
+
+    }
+    n = x.size();
+
+    for(int i = 0; i < n; i++ )
+    {
+        if(!x.empty())
+        {
+            arr[n - i - 1] = x.top();
+            x.pop();
+        }
+
+    }
+    for(int i = 0; i < n; i+= 2)
+    {
+        cout << "[" << arr[i] << ", " << arr[i + 1] << " ]";
+    }
+    return 0;
+}
