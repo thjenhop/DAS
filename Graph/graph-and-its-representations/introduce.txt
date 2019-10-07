@@ -1,0 +1,5 @@
+Source : https://www.geeksforgeeks.org/graph-and-its-representations/
+
+Following two are the most commonly used representations of a graph.
+1. Adjacency Matrix
+2. Adjacency List
