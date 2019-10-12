@@ -8,6 +8,8 @@ void addEdge( vector<int> adj[], int source, int dest);
 
 void BFS(vector<int> adj[], bool visted[], int nodes);
 
+void printAdjacentList(vector<int> adj[], int vertexs);
+
 int main(){
 
 	int test_case;
@@ -26,8 +28,12 @@ int main(){
 			cin >> source;
 			cin >> dest;
 			addEdge(adj, source, dest);
+			//cout << "source: " << source << ", dest: " << dest << endl;
 		}
 		cout << endl << "Graph " << i  << endl;
+		cout << "AdjacentList\n";
+		printAdjacentList(adj, nodes);
+		cout << "Result BFS\n";
 		BFS(adj, visted, nodes);
 
 	}
@@ -44,14 +50,16 @@ void BFS(vector<int> adj[], bool visted[], int nodes){
 	queue<int> myQueue;
 	for(int i = 0; i < nodes; i++){
 
-		// myQueue.push(i);
-		// int nodesFist = myQueue.front();
-		// // check node parent visted or not
-		if(visted[i] == false){
-			visted[i] = true;
-			cout << i << " ";
+		myQueue.push(i);
+		int nodesFist = myQueue.front();
+		// check node parent visted or not
+		if(visted[nodesFist] == false){
+			visted[nodesFist] = true;
+			cout << nodesFist << " ";
 
 		}
+		myQueue.pop();
+
 		int index = 0;
 		int lengthList = adj[i].size();
 		
@@ -60,7 +68,9 @@ void BFS(vector<int> adj[], bool visted[], int nodes){
 		while(index < lengthList){
 			currentNode = adj[i][index];
 			if(visted[currentNode] == false){
-				myQueue.push(currentNode);	
+				myQueue.push(currentNode);
+				visted[currentNode] = true;
+
 			}
 			index++;
 		}
@@ -71,16 +81,19 @@ void BFS(vector<int> adj[], bool visted[], int nodes){
 			visted[currentNode] = true;
 			myQueue.pop();
 		}
+		//cout << ". Done node list node " << i << endl;
 
 	}
 
 }
 
-bool checkVistAll(bool visted[], int nodes){
-	for(int i = 0; i < nodes / 2; i++){
-		if((visted[i] == false) || visted[nodes - 1 - i] == false){
-			return false;
+void printAdjacentList(vector<int> adj[], int vertexs){
+	
+	for(int vertex = 0; vertex < vertexs; vertex++){
+		cout << vertex;
+		for(int i = 0; i < adj[vertex].size(); i++){
+			cout  << "-> " << adj[vertex][i];
 		}
+		cout << endl;
 	}
-	return true;
 }
