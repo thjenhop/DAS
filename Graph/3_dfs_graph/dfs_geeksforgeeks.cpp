@@ -21,10 +21,11 @@ public:
 	}
 	void addEdge(int source, int dest){
 		adj[source].push_back(dest);
+		adj[dest].push_back(source);
 	}
 	void DFS_Sub(int source, bool visited[]){
 		visited[source] = true;
-		cout << source << " ";
+		cout << source << "-> ";
 		list<int> :: iterator i;
 
 		for(i = adj[source].begin(); i != adj[source].end(); i++){
